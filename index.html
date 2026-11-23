@@ -66,7 +66,7 @@ button.x{border:none;background:none;font-size:18px;color:var(--sub);cursor:poin
 .pane{display:none}.pane.on{display:block}
 #p-cd,#p-co{min-height:68vh}
 #p-cd .it,#p-co .it{padding:14px 6px;font-size:14px}
-#p-cd .it .big,#p-co .it .big{font-size:16px}
+#p-cd .it .big{font-size:16px}
 #p-cd .f input,#p-co .f input{padding:9px 10px;font-size:14px}
 #p-cd .btn,#p-co .btn{padding:9px 18px}
 .sh{font-size:17px}
@@ -76,7 +76,8 @@ button.x{border:none;background:none;font-size:18px;color:var(--sub);cursor:poin
 .sw.pig{width:136px}.sw.fish{width:176px}
 .sw svg.shp{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 4px 5px #0002)}
 .sw .txt{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#3b4b48;overflow:hidden;pointer-events:none}
-.sw .txt .tt{justify-content:center;line-height:1.1;font-size:9.5px;white-space:nowrap}.sw .txt .nn,.sw .txt .bb{line-height:1.1}
+.sw .txt .tt{justify-content:center;line-height:1.12;font-size:9.5px;white-space:nowrap}
+.sw .txt .nn,.sw .txt .bb{line-height:1.12}
 .sw .txt .nn{color:#5d6e6a;font-size:8.5px;margin-top:1px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .sw .txt .bb{color:#3f7f7b;font-size:9.5px;margin-top:1px}
 .sw.late .txt .bb{color:#b2483f}
@@ -253,4 +254,4 @@ function tick(){
   const up=cdItems().find(c=>new Date(c.at)>now);
   if(up){$("cn").textContent="距离 "+up.name;$("cb").textContent=hms(new Date(up.at)-now)}
   else{const e=new Date(now);e.setHours(24,0,0,0);$("cn").textContent="今天还剩";$("cb").textContent=hms(e-now).slice(2)}
-  $("dot").style.display=D.course.some(c=>!c.done&&c.due&&new Date
+  $("dot").style.display=D.course.some(c=>!c.done&&c.due&&new Date(c.due)<now)
