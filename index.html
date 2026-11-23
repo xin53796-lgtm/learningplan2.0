@@ -66,7 +66,7 @@ button.x{border:none;background:none;font-size:18px;color:var(--sub);cursor:poin
 .pane{display:none}.pane.on{display:block}
 #p-cd,#p-co{min-height:68vh}
 #p-cd .it,#p-co .it{padding:14px 6px;font-size:14px}
-#p-cd .it .big{font-size:16px}
+#p-cd .it .big,#p-co .it .big{font-size:16px}
 #p-cd .f input,#p-co .f input{padding:9px 10px;font-size:14px}
 #p-cd .btn,#p-co .btn{padding:9px 18px}
 .sh{font-size:17px}
@@ -76,9 +76,9 @@ button.x{border:none;background:none;font-size:18px;color:var(--sub);cursor:poin
 .sw.pig{width:136px}.sw.fish{width:176px}
 .sw svg.shp{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 4px 5px #0002)}
 .sw .txt{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#3b4b48;overflow:hidden;pointer-events:none}
-.sw .txt .tt{justify-content:center;line-height:1.15;font-size:10px;white-space:nowrap}.sw .txt .nn,.sw .txt .bb{line-height:1.15}
-.sw .txt .nn{color:#5d6e6a;font-size:9px;margin-top:1px}
-.sw .txt .bb{color:#3f7f7b;font-size:10.5px}
+.sw .txt .tt{justify-content:center;line-height:1.1;font-size:9.5px;white-space:nowrap}.sw .txt .nn,.sw .txt .bb{line-height:1.1}
+.sw .txt .nn{color:#5d6e6a;font-size:8.5px;margin-top:1px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.sw .txt .bb{color:#3f7f7b;font-size:9.5px;margin-top:1px}
 .sw.late .txt .bb{color:#b2483f}
 .sw.late .face{fill:#f3bdb7}.sw.late .bd{fill:#f6d3cf}
 .dr>.dcell{flex-direction:column;gap:0}
@@ -134,8 +134,8 @@ button.x{border:none;background:none;font-size:18px;color:var(--sub);cursor:poin
 <svg class="shp" viewBox="0 0 190 160" style="color:#4a5d5a"><path d="M95 2 61 52M95 2 97 51" stroke="#8a9a95" stroke-width="1.6" fill="none"/><g transform="translate(0,30)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M48 36C60 6 96 8 112 34Z" fill="#bcd9e2"/><path d="M152 72C166 60 178 44 186 36 182 56 182 88 186 108 176 98 164 84 152 72Z" fill="#bcd9e2"/><path d="M70 112C62 128 80 132 92 116Z" fill="#bcd9e2"/><ellipse class="face" cx="84" cy="72" rx="74" ry="47" fill="#d4e8ec"/><circle cx="28" cy="60" r="3" fill="currentColor" stroke="none"/><ellipse cx="34" cy="82" rx="8" ry="5.5" fill="#f0aaa8" opacity=".6" stroke="none"/><path d="M18 71q4 4 8 1" fill="none" stroke-width="1.8"/></g><g id="fishT" text-anchor="middle"></g></svg>
 </div>
 <div class="sw pig" id="sw2" data-p="co"><i class="nail"></i>
-<svg class="shp" viewBox="-20 -75 640 700" style="color:#111"><path d="M300 -70 52 100M300 -70 540 98" stroke="#8a9a95" stroke-width="5" fill="none"/><rect class="bd" x="8" y="340" width="574" height="250" rx="46" fill="#fdeff0" stroke="#6f565b" stroke-width="13"/><use href="#pigG"/></svg>
-<div class="txt" style="left:9%;top:61.5%;width:80%;height:29%"><div class="tt"><span id="h2t">任务截止</span></div><div class="nn" id="h2n"></div><div class="bb" id="h2b"></div></div></div>
+<svg class="shp" viewBox="-20 -75 640 720" style="color:#111"><path d="M300 -70 52 100M300 -70 540 98" stroke="#8a9a95" stroke-width="5" fill="none"/><rect class="bd" x="8" y="335" width="574" height="295" rx="46" fill="#fdeff0" stroke="#6f565b" stroke-width="13"/><use href="#pigG"/></svg>
+<div class="txt" style="left:8%;top:59%;width:82%;height:34%"><div class="tt"><span id="h2t">任务截止</span></div><div class="nn" id="h2n"></div><div class="bb" id="h2b"></div></div></div>
 </div>
 <div class="dock">
   <button class="ic" data-p="cd"><span class="b"><svg viewBox="0 0 64 64" style="width:100%;height:100%;padding:3px" stroke="#4a5d5a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="M44 33C50 29 56 23 61 18 58 28 58 38 61 47 55 43 49 39 44 33Z" fill="#bcd9e2"/><path d="M20 20C24 9 40 9 43 21Z" fill="#bcd9e2"/><path d="M25 46C22 55 31 56 36 48Z" fill="#bcd9e2"/><ellipse cx="29" cy="34" rx="24" ry="17" fill="#d4e8ec"/><circle cx="16" cy="30" r="2.2" fill="#4a5d5a" stroke="none"/><ellipse cx="19" cy="39" rx="3.6" ry="2.4" fill="#f2aeab" stroke="none" opacity=".85"/><path d="M9 35q2.5 2.5 5 .5" fill="none" stroke-width="1.8"/></svg></span>倒计时</button>
@@ -253,167 +253,4 @@ function tick(){
   const up=cdItems().find(c=>new Date(c.at)>now);
   if(up){$("cn").textContent="距离 "+up.name;$("cb").textContent=hms(new Date(up.at)-now)}
   else{const e=new Date(now);e.setHours(24,0,0,0);$("cn").textContent="今天还剩";$("cb").textContent=hms(e-now).slice(2)}
-  $("dot").style.display=D.course.some(c=>!c.done&&c.due&&new Date(c.due)<now)?"block":"none";
-  lists();
-}
-function open(p){pane=p;
-  document.querySelectorAll(".pane").forEach(e=>e.classList.toggle("on",e.id==="p-"+p));
-  $("st").textContent={me:"📝 今日学习收获 · "+cur.slice(5).replace("-","/"),cd:"🐟 倒计时",co:"🐷 任务截止",cmp:"🐱 近期每日任务对比",bk:"☁️ 备份与恢复"}[p];
-  $("mask").classList.add("on");if(p==="cmp")cmpRender();lists()}
-function close(){pane=null;$("mask").classList.remove("on");renderMemo()}
-document.querySelectorAll(".ic[data-p],.chip[data-p]").forEach(b=>b.onclick=()=>open(b.dataset.p));
-$("sx").onclick=close;$("mask").onclick=e=>{if(e.target===$("mask"))close()};
-
-$("rows").addEventListener("change",e=>{
-  const r=e.target.closest(".r");if(!r)return;const t=D.tasks[cur][+r.dataset.i];
-  if(e.target.type==="checkbox")t.done=e.target.checked;
-  else if(e.target.classList.contains("tm"))t.time=e.target.value;else t.t=e.target.value;
-  save();tick();
-});
-const shift=n=>{const d=new Date(cur+"T00:00");d.setDate(d.getDate()+n);cur=ymd(d);renderRows()};
-$("prev").onclick=()=>shift(-1);$("next").onclick=()=>shift(1);
-$("date").onchange=e=>{if(e.target.value){cur=e.target.value;renderRows()}};
-$("memo").addEventListener("input",e=>{pages(cur)[mp]=e.target.value;save()});
-$("mbox").onclick=()=>open("me");
-$("tprev").onclick=()=>{tp--;drawRows()};$("tnext").onclick=()=>{tp++;drawRows()};
-$("tadd").onclick=()=>{const a=slots(cur);for(let i=0;i<N;i++)a.push({t:"",time:"",done:false});tp=a.length/N-1;save();drawRows()};
-let tdArm=0;$("tdel").onclick=()=>{if(!tdArm){tdArm=1;$("tdel").textContent="再点确认";setTimeout(()=>{tdArm=0;$("tdel").textContent="删本页"},2500);return}tdArm=0;$("tdel").textContent="删本页";const a=slots(cur);if(a.length>N)a.splice(tp*N,N);else a.forEach(t=>{t.t="";t.time="";t.done=false});save();drawRows()};
-$("mprev").onclick=()=>{mp--;renderMemo()};$("mnext").onclick=()=>{mp++;renderMemo()};
-$("madd").onclick=()=>{const a=pages(cur);a.push("");mp=a.length-1;save();renderMemo();$("memo").focus()};
-$("mdel").onclick=()=>{const a=pages(cur);if(a.length>1){a.splice(mp,1);mp=Math.min(mp,a.length-1)}else a[0]="";save();renderMemo()};
-
-$("cdAdd").onclick=()=>{if(!$("cdA").value)return;D.cds.push({id:uid(),name:$("cdN").value.trim()||"倒计时",at:$("cdA").value,ack:new Date($("cdA").value)-new Date()<=(D.rd||2)*864e5});$("cdN").value=$("cdA").value="";save();tick()};
-$("cdL").onclick=e=>{if(e.target.classList.contains("x")){const id=e.target.closest(".it").dataset.id;D.cds=D.cds.filter(c=>c.id!==id);save();tick()}};
-$("cAdd").onclick=()=>{const t=$("cT").value.trim();if(!t)return;D.course.push({id:uid(),sub:$("cS").value.trim(),t,due:$("cD").value,done:false,ack:!!$("cD").value&&new Date($("cD").value)-new Date()<=(D.rd||2)*864e5});$("cT").value=$("cS").value=$("cD").value="";save();tick()};
-$("coL").addEventListener("change",e=>{const c=D.course.find(x=>x.id===e.target.closest(".it").dataset.id);if(c){c.done=e.target.checked;save();tick()}});
-$("coL").addEventListener("click",e=>{if(e.target.classList.contains("x")){const id=e.target.closest(".it").dataset.id;D.course=D.course.filter(x=>x.id!==id);save();tick()}});
-$("n7").onclick=()=>{span=7;cmpRender()};$("n14").onclick=()=>{span=14;cmpRender()};
-$("cmpL").onclick=e=>{const r=e.target.closest(".cmp");if(r){cur=r.dataset.k;close();renderRows()}};
-$("exp").onclick=()=>{const b=$("bk");b.value=JSON.stringify(D);b.focus();b.select();let ok=false;try{ok=document.execCommand("copy")}catch(e){}
-  $("bm").style.color="var(--ok)";$("bm").textContent=ok?"已生成并复制，请粘贴保存好。":"已生成，请长按全选并复制保存。"};
-$("imp").onclick=()=>{try{const o=JSON.parse($("bk").value);if(!o||!o.tasks)throw 0;
-  D=Object.assign({tasks:{},memo:{},course:[],cds:[]},o);if(!D.cds)D.cds=[];save();renderRows();
-  $("bm").style.color="var(--ok)";$("bm").textContent="恢复成功 ✓"}catch(e){$("bm").style.color="var(--bad)";$("bm").textContent="备份内容无法识别，请检查是否完整粘贴。"}};
-function fishText(name,time){
-  const n=[...String(name)],per=9;
-  const ls=n.length<=per?[n.join("")]:[n.slice(0,per).join(""),n.slice(per,per*2).join("").replace(/.$/,c=>n.length>per*2?"…":c)];
-  const rows=[{t:"倒计时",s:12,w:600,f:"#3b4b48",h:15},...ls.map(t=>({t,s:10.5,w:400,f:"#5d6e6a",h:13})),{t:time,s:12.5,w:700,f:"#3f7f7b",h:16}];
-  let y=102-rows.reduce((a,r)=>a+r.h,0)/2;
-  $("fishT").innerHTML=rows.map(r=>{const yy=y+r.h/2;y+=r.h;return `<text x="84" y="${yy}" font-size="${r.s}" font-weight="${r.w}" fill="${r.f}" dominant-baseline="central">${esc(r.t)}</text>`}).join("");
-}
-function hang(){
-  fishText($("cn").textContent.replace(/^距离 /,""),$("cb").textContent);
-  const now=new Date(),a=D.course.filter(c=>!c.done&&c.due).sort((x,y)=>x.due.localeCompare(y.due));
-  const up=a.filter(c=>new Date(c.due)>=now),od=a.length-up.length,c=up[0]||a[0];
-  if(!c){$("h2n").textContent=D.course.some(x=>!x.done)?"有作业未设截止时间":"暂无待交作业";$("h2b").textContent="点我查看";$("h2t").textContent="任务截止";$("sw2").classList.remove("late");return}
-  const late=new Date(c.due)<now;
-  $("h2n").textContent=(c.sub?c.sub+" · ":"")+c.t;
-  $("h2b").textContent=(late?"已逾期":"还剩")+fmt(now-new Date(c.due));
-  $("h2t").textContent="任务截止"+(a.length>1?" ×"+a.length:"")+(od&&!late?" ⚠"+od:"");
-  $("sw2").classList.toggle("late",late);
-}
-const sws=[...document.querySelectorAll(".sw")].map((el,i)=>({el,a:(i?-1:1)*0.22,v:0,drag:false,ph:i*2.3}));
-let lastT=performance.now();
-function frame(t){const dt=Math.min(.033,(t-lastT)/1000);lastT=t;
-  sws.forEach(s=>{if(!s.drag){const acc=-9*Math.sin(s.a)-0.4*s.v+0.55*Math.sin(t/1000*0.9+s.ph);s.v+=acc*dt;s.a+=s.v*dt}
-    s.el.style.transform="rotate("+s.a+"rad)"});requestAnimationFrame(frame)}
-sws.forEach(s=>{const el=s.el;let g=null;
-  el.addEventListener("pointerdown",e=>{el.setPointerCapture(e.pointerId);const pr=el.offsetParent.getBoundingClientRect();
-    g={px:pr.left+el.offsetLeft+el.offsetWidth/2,py:pr.top+el.offsetTop,x0:e.clientX,y0:e.clientY,t0:performance.now(),mv:0,lt:performance.now()};s.drag=true;s.v=0});
-  el.addEventListener("pointermove",e=>{if(!g)return;g.mv=Math.max(g.mv,Math.hypot(e.clientX-g.x0,e.clientY-g.y0));
-    const ang=Math.max(-1.15,Math.min(1.15,Math.atan2(e.clientX-g.px,Math.max(30,e.clientY-g.py))));
-    const n=performance.now(),dt=Math.max(.008,(n-g.lt)/1000);s.v=s.v*.6+((ang-s.a)/dt)*.4;g.lt=n;s.a=ang});
-  const end=e=>{if(!g)return;s.drag=false;s.v=Math.max(-8,Math.min(8,s.v));
-    if(g.mv<6&&performance.now()-g.t0<400){s.v+=(Math.random()<.5?-1:1)*2.5;open(el.dataset.p)}g=null};
-  el.addEventListener("pointerup",end);el.addEventListener("pointercancel",end)});
-requestAnimationFrame(frame);
-
-if(!D.rd)D.rd=2;
-let pressing=false,pt=null,edt=null,alertList=[];
-function startPress(e,type){
-  const it=e.target.closest(".it");if(!it||e.target.closest("button,input"))return;
-  const id=it.dataset.id,x=e.clientX,y=e.clientY;
-  clearTimeout(pt);pressing=true;
-  const rm=()=>{document.removeEventListener("pointermove",mv);document.removeEventListener("pointerup",cancel);document.removeEventListener("pointercancel",cancel)};
-  const cancel=()=>{clearTimeout(pt);pressing=false;rm()};
-  const mv=ev=>{if(Math.hypot(ev.clientX-x,ev.clientY-y)>10)cancel()};
-  pt=setTimeout(()=>{pressing=false;rm();if(navigator.vibrate)try{navigator.vibrate(30)}catch(_){}openEdit(type,id)},550);
-  document.addEventListener("pointermove",mv);document.addEventListener("pointerup",cancel);document.addEventListener("pointercancel",cancel);
-}
-$("coL").addEventListener("pointerdown",e=>startPress(e,"co"));
-$("cdL").addEventListener("pointerdown",e=>startPress(e,"cd"));
-$("coL").oncontextmenu=$("cdL").oncontextmenu=e=>e.preventDefault();
-function openEdit(type,id){
-  const it=type==="co"?D.course.find(x=>x.id===id):D.cds.find(x=>x.id===id);if(!it)return;
-  edt={type,id};
-  $("et").textContent=type==="co"?"✏️ 修改任务截止":"✏️ 修改倒计时";
-  if(type==="co"){$("e1").placeholder="科目";$("e1").value=it.sub||"";$("e2").style.display="";$("e2").value=it.t;$("e3").value=it.due||""}
-  else{$("e1").placeholder="目标名称";$("e1").value=it.name;$("e2").style.display="none";$("e3").value=it.at}
-  $("emask").classList.add("on");
-}
-$("ex").onclick=()=>{$("emask").classList.remove("on");edt=null};
-$("emask").onclick=e=>{if(e.target===$("emask")){$("emask").classList.remove("on");edt=null}};
-$("es").onclick=()=>{
-  if(!edt)return;const win=(D.rd||2)*864e5;
-  if(edt.type==="co"){const c=D.course.find(x=>x.id===edt.id);if(!c)return;const t=$("e2").value.trim();if(!t)return;
-    const old=c.due;c.sub=$("e1").value.trim();c.t=t;c.due=$("e3").value;if(c.due!==old)c.ack=!!c.due&&new Date(c.due)-new Date()<=win}
-  else{const c=D.cds.find(x=>x.id===edt.id);if(!c||!$("e3").value)return;
-    const old=c.at;c.name=$("e1").value.trim()||"倒计时";c.at=$("e3").value;if(c.at!==old)c.ack=new Date(c.at)-new Date()<=win}
-  save();$("emask").classList.remove("on");edt=null;tick();hang();
-};
-function checkAlerts(){
-  if($("amask").classList.contains("on"))return;
-  const now=new Date(),win=(D.rd||2)*864e5,L=[];
-  D.course.forEach(c=>{if(!c.done&&c.due&&!c.ack){const d=new Date(c.due)-now;if(d>0&&d<=win)L.push({o:c,k:"任务",n:(c.sub?c.sub+" · ":"")+c.t,at:c.due,d})}});
-  D.cds.forEach(c=>{if(!c.ack){const d=new Date(c.at)-now;if(d>0&&d<=win)L.push({o:c,k:"倒计时",n:c.name,at:c.at,d})}});
-  if(!L.length)return;
-  L.sort((a,b)=>a.d-b.d);alertList=L;
-  $("aL").innerHTML=L.map(x=>`<div class="it"><span class="tx"><b>${esc(x.n)}</b><span class="m"><br>${x.k} · 截止 ${x.at.replace("T"," ")}</span></span><b class="big" style="color:var(--bad)">还剩${fmt(x.d)}</b></div>`).join("");
-  $("amask").classList.add("on");
-  try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(_){}
-  if(window.Notification&&Notification.permission==="granted"&&navigator.serviceWorker){
-    navigator.serviceWorker.ready.then(r=>r.showNotification("⏰ 截止提醒",{body:L.map(x=>x.n+"：还剩"+fmt(x.d)).join("\n"),tag:"deadline",renotify:true,requireInteraction:true,icon:"./icon-192.png",vibrate:[200,100,200]})).catch(()=>{});
-  }
-}
-$("aok").onclick=()=>{
-  alertList.forEach(x=>x.o.ack=true);alertList=[];save();$("amask").classList.remove("on");
-  if(navigator.serviceWorker)navigator.serviceWorker.ready.then(r=>r.getNotifications({tag:"deadline"}).then(a=>a.forEach(n=>n.close()))).catch(()=>{});
-};
-$("rd").value=D.rd;
-$("rd").onchange=()=>{D.rd=Math.max(1,Math.min(30,+$("rd").value||2));$("rd").value=D.rd;save()};
-$("ntm").textContent=window.Notification?(Notification.permission==="granted"?"系统通知已开启 ✓":""):"当前浏览器不支持系统通知";
-$("nt").onclick=async()=>{
-  if(!window.Notification){$("ntm").textContent="当前浏览器不支持系统通知";return}
-  const p=await Notification.requestPermission();
-  $("ntm").style.color=p==="granted"?"var(--ok)":"var(--bad)";
-  $("ntm").textContent=p==="granted"?"系统通知已开启 ✓":"没有获得通知权限，请在手机系统设置里允许本应用通知";
-};
-function icsEsc(s){return String(s).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n")}
-function icsDt(s){const d=new Date(s);return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"T"+pad(d.getHours())+pad(d.getMinutes())+"00"}
-function exportIcs(){
-  const now=new Date(),ev=[];
-  D.course.forEach(c=>{if(!c.done&&c.due&&new Date(c.due)>now)ev.push({id:c.id,t:"【任务截止】"+(c.sub?c.sub+" ":"")+c.t,at:c.due})});
-  D.cds.forEach(c=>{if(new Date(c.at)>now)ev.push({id:c.id,t:"【倒计时】"+c.name,at:c.at})});
-  if(!ev.length){alert("没有未到期的任务截止或倒计时可以导出");return}
-  const rd=D.rd||2,stamp=now.toISOString().replace(/[-:]/g,"").slice(0,15)+"Z";
-  const L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//study-planner//CN","CALSCALE:GREGORIAN","METHOD:PUBLISH"];
-  ev.forEach(e=>{const end=new Date(new Date(e.at).getTime()+30*6e4);
-    L.push("BEGIN:VEVENT","UID:"+e.id+"@study-planner","DTSTAMP:"+stamp,"DTSTART:"+icsDt(e.at),"DTEND:"+icsDt(end),"SUMMARY:"+icsEsc(e.t),
-      "BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+icsEsc(e.t+"（还剩"+rd+"天）"),"TRIGGER:-P"+rd+"D","END:VALARM",
-      "BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+icsEsc(e.t+"（现在截止）"),"TRIGGER:PT0S","END:VALARM","END:VEVENT")});
-  L.push("END:VCALENDAR");
-  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([L.join("\r\n")],{type:"text/calendar;charset=utf-8"}));
-  a.download="deadline-reminders.ics";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},3000);
-}
-document.addEventListener("click",e=>{if(e.target.closest(".ics"))exportIcs()});
-document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkAlerts()});
-save();renderRows();hang();checkAlerts();setInterval(()=>{tick();hang();checkAlerts()},1000);
-
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(() => {});
-  });
-}
-</script>
-</body>
-</html>
+  $("dot").style.display=D.course.some(c=>!c.done&&c.due&&new Date
